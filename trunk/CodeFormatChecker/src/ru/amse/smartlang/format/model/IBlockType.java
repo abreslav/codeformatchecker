@@ -1,6 +1,9 @@
-package ru.amse.smartlang.format.checker;
+package ru.amse.smartlang.format.model;
 
 public interface IBlockType {
+	/**
+	 * The root of block type inheritanance
+	 */
 	public static final IBlockType ROOT = new IBlockType() {
 		public IBlockType getSuperType() {
 			return ROOT;

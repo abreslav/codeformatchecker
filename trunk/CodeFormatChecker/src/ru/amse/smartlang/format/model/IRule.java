@@ -1,5 +1,8 @@
-package ru.amse.smartlang.format.checker;
+package ru.amse.smartlang.format.model;
 
+/**
+ * Desctibes code formatter rule.
+ */
 public interface IRule {
 	IBlockType getParentBlockType();
 	IBlockType getLeftBlockType();
