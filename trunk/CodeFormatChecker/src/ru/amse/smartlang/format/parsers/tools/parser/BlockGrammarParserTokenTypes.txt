@@ -1,0 +1,20 @@
+// $ANTLR 2.7.7 (20060930): blocks.g -> BlockGrammarParserTokenTypes.txt$
+BlockGrammarParser    // output token vocab name
+OPTION_NAME=4
+LCURLY=5
+RCURLY=6
+ID=7
+COLON=8
+SEMI=9
+OR=10
+MAY=11
+MULTI=12
+PLUS=13
+NOT_INCL=14
+STRING=15
+RANGE=16
+LPAREN=17
+RPAREN=18
+WS=19
+LETTER=20
+DIGIT=21
