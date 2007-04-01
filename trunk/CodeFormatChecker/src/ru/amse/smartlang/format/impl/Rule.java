@@ -12,6 +12,8 @@ public class Rule implements IRule {
 	private IBlockType thisBlockType;
 
 	private Whitespace whitespace;
+	
+	private boolean decent;
 
 	public Rule(IBlockType leftBlockType, IBlockType parentBlockType,
 			IBlockType thisBlockType, Whitespace whitespace) {
@@ -20,6 +22,7 @@ public class Rule implements IRule {
 		this.parentBlockType = parentBlockType;
 		this.thisBlockType = thisBlockType;
 		this.whitespace = whitespace;
+		this.decent = false;
 	}
 
 	public IBlockType getLeftBlockType() {
@@ -36,6 +39,14 @@ public class Rule implements IRule {
 
 	public Whitespace getWhitespace() {
 		return whitespace;
+	}
+
+	public void setDecent(boolean newValue) {
+		decent = newValue;
+	}
+	
+	public boolean isDecent() {
+		return decent;
 	}
 
 }

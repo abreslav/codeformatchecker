@@ -2,12 +2,10 @@ package ru.amse.smartlang.format.checker;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
+import ru.amse.smartlang.format.model.AbstractBlockWalker;
 import ru.amse.smartlang.format.model.IBlock;
 import ru.amse.smartlang.format.model.IBlockType;
-import ru.amse.smartlang.format.model.IBlockWalker;
-import ru.amse.smartlang.format.model.ICompositeBlock;
 import ru.amse.smartlang.format.model.IRegion;
 import ru.amse.smartlang.format.model.IRule;
 import ru.amse.smartlang.format.model.IRuleSet;
@@ -19,40 +17,13 @@ public class FormatChecker {
 	private boolean ok;
 	private BlockWalker BLOCK_WALKER = new BlockWalker();
 	
-	private class BlockWalker implements IBlockWalker {
-		private ArrayList<IBlockType> parentStack = new ArrayList<IBlockType>();
+	private class BlockWalker extends AbstractBlockWalker{
 		
-		public void init() {
-			parentStack.clear();
-			parentStack.add(IBlockType.NULL);
-		}
-		
-		private IBlockType getParent() {
-			return parentStack.get(parentStack.size() - 1);
-		}
-		
-		public void visitComposite(ICompositeBlock block) {
-			List<IBlock> children = block.getChildren();
-			IBlockType parent = getParent();
-			parentStack.add(block.getType());
-			IBlockType left = children.get(0).getType();
-			for(int i = 1; i < children.size(); i++) {
-				IBlock thiz = children.get(i); 
-				IBlockType thizType = thiz.getType();
-				IRule rule = ruleSet.getRule(parent, left, thizType);
-				if(thiz.getWhitespace() != rule.getWhitespace()) {
-					notifyListners(block.getWhitespaceRegion(), thiz.getWhitespace(), rule.getWhitespace());
-				}
-				thiz.visit(this);
-				left = thizType;
-			}
-			parentStack.remove(parentStack.size() - 1);
-		}
-
-		public void visitPrimitive(IBlock block) {
-			IRule rule = ruleSet.getRule(getParent(), IBlockType.NULL, block.getType());
-			if(block.getWhitespace() != rule.getWhitespace()) {
-				notifyListners(block.getWhitespaceRegion(), block.getWhitespace(), rule.getWhitespace());
+		@Override
+		public void visit(IBlockType parent, IBlockType left, IBlock thiz) {
+			IRule rule = ruleSet.getRule(parent, left, thiz.getType());
+			if(thiz.getWhitespace() != rule.getWhitespace()) {
+				notifyListners(thiz.getWhitespaceRegion(), thiz.getWhitespace(), rule.getWhitespace());
 			}
 		}
 	}

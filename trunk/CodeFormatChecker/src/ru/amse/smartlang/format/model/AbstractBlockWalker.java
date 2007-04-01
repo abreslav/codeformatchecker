@@ -4,23 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractBlockWalker implements IBlockWalker{
-	private List<ICompositeBlock> parents = new ArrayList<ICompositeBlock>();
+	private List<IBlockType> parents = new ArrayList<IBlockType>();
 	
-	public abstract void visit(ICompositeBlock parent, IBlock left, IBlock thiz);
+	public abstract void visit(IBlockType parent, IBlockType left, IBlock thiz);
 	
-	public void visitComposite(ICompositeBlock block) {
-		parents.add(block);
+	public final void visitComposite(ICompositeBlock block) {
+		IBlockType parentType = block.getType();
+		parents.add(parentType);
 		List<IBlock> children = block.getChildren();
-		IBlock left = IBlock.NULL;
+		IBlockType left = IBlockType.NULL;
 		for(int i = 0; i < children.size(); i++) {
 			IBlock thiz = children.get(i);
-			visit(block, left, thiz);
+			visit(parentType, left, thiz);
 			thiz.visit(this);
-			left = thiz;
+			left = thiz.getType();
 		}
 		parents.remove(parents.size() - 1);
 	}
 
-	public void visitPrimitive(IBlock block) {
+	public final void visitPrimitive(IBlock block) {
 	}
 }

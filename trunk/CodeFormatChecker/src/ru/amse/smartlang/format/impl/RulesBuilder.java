@@ -3,7 +3,6 @@ package ru.amse.smartlang.format.impl;
 import ru.amse.smartlang.format.model.AbstractBlockWalker;
 import ru.amse.smartlang.format.model.IBlock;
 import ru.amse.smartlang.format.model.IBlockType;
-import ru.amse.smartlang.format.model.ICompositeBlock;
 import ru.amse.smartlang.format.model.IRuleSet;
 import ru.amse.smartlang.format.model.IRulesBuilder;
 
@@ -12,11 +11,12 @@ public class RulesBuilder implements IRulesBuilder {
 
 	private class BuilderWalker extends AbstractBlockWalker {
 		@Override
-		public void visit(ICompositeBlock parent, IBlock left, IBlock thiz) {
-			if(rules.containsExactRule(parent.getType(), left.getType(), thiz.getType())) {
-				//TODO Make rule decent
+		public void visit(IBlockType parent, IBlockType left, IBlock thiz) {
+			if(rules.containsExactRule(parent, left, thiz.getType())) {
+				Rule rule = (Rule) rules.getRule(parent, left, thiz.getType());
+				rule.setDecent(true);
 			} else {
-				rules.addRule(new Rule(left.getType(), parent.getType(), thiz.getType(), thiz.getWhitespace()));
+				rules.addRule(new Rule(left, parent, thiz.getType(), thiz.getWhitespace()));
 			}
 		}
 	}
