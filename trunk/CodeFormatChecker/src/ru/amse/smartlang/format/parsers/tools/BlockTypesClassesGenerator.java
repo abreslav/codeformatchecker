@@ -70,7 +70,7 @@ public class BlockTypesClassesGenerator {
 	}
 	
 	public static void main(String[] args) throws IOException {
-		BlockTypesDef def = Utils.parseBlockTypesDef(new FileInputStream(args[0]));
-		generate(def, "", new FileOutputStream("D:\\BlockTypes.java"));
+		BlockTypesDef def = Utils.parseBlockTypesDef(new FileInputStream("test.out"));
+		generate(def, "", new FileOutputStream("test.java"));
 	}
 }

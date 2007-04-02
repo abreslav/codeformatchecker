@@ -1,8 +1,7 @@
 package ru.amse.smartlang.format.model;
 
-import java.io.Serializable;
 
-public interface IRuleSet extends Serializable {
+public interface IRuleSet {
 	/**
 	 * Adds rule to rule set
 	 * 

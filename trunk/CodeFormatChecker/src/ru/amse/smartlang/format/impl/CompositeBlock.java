@@ -5,7 +5,7 @@ import java.util.List;
 
 import ru.amse.smartlang.format.model.IBlock;
 import ru.amse.smartlang.format.model.IBlockType;
-import ru.amse.smartlang.format.model.IBlockWalker;
+import ru.amse.smartlang.format.model.IBlockVisitor;
 import ru.amse.smartlang.format.model.ICompositeBlock;
 import ru.amse.smartlang.format.model.IRegion;
 import ru.amse.smartlang.format.model.Whitespace;
@@ -23,7 +23,7 @@ public class CompositeBlock extends Block implements ICompositeBlock {
 	}
 	
 	@Override
-	public void visit(IBlockWalker walker) {
+	public void accept(IBlockVisitor walker) {
 		walker.visitComposite(this);
 	}
 

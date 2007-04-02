@@ -1,9 +1,9 @@
 package ru.amse.smartlang.format.model;
 
-import ru.amse.smartlang.format.impl.RulesBuilder;
+import ru.amse.smartlang.format.impl.RulesConstructor;
 
 public class Builders {
-	public IRulesBuilder newRulesBuilder() {
-		return new RulesBuilder();
+	public IRulesConstructor newRulesBuilder() {
+		return new RulesConstructor();
 	}
 }

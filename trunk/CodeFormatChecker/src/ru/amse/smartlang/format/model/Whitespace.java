@@ -5,7 +5,7 @@ import java.util.Map;
 
 public final class Whitespace {
 	private static final Map<Integer, Whitespace> map = new HashMap<Integer, Whitespace>();
-	
+
 	private final int newLines;
 
 	private final int indents;
@@ -58,13 +58,15 @@ public final class Whitespace {
 			return false;
 		return true;
 	}
-	
-	public static Whitespace getInstance(final int newLines, final int indents, final int spaces) {
-		if(newLines > 0xFF || indents > 0xFF || spaces > 0xFF) {
+
+	public static Whitespace getInstance(final int newLines, final int indents,
+			final int spaces) {
+		if (newLines > 0xFF || indents > 0xFF || spaces > 0xFF) {
 			return new Whitespace(newLines, indents, spaces);
 		}
-		int key = (newLines & 0xFF) | ((indents & 0xFF) << 16) | ((spaces & 0xFF) << 24);
-		if(map.containsKey(key)) {
+		int key = (newLines & 0xFF) | ((indents & 0xFF) << 16)
+				| ((spaces & 0xFF) << 24);
+		if (map.containsKey(key)) {
 			return map.get(key);
 		}
 		Whitespace w = new Whitespace(newLines, indents, spaces);

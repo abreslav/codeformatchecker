@@ -21,7 +21,7 @@ public class BlockTypesListGenerator {
 
 	public static void main(String[] args) throws FileNotFoundException {
 		BlockGrammarLexer lexer = new BlockGrammarLexer(new FileInputStream(
-				args[0]));
+				"test.in"));
 		BlockGrammarParser parser = new BlockGrammarParser(lexer);
 		Map<String, String> map = new HashMap<String, String>();
 		List<String> blocks = new ArrayList<String>();
@@ -35,7 +35,7 @@ public class BlockTypesListGenerator {
 			return;
 		}
 		AST ast = (CommonAST) parser.getAST();
-		PrintStream ps = new PrintStream(new FileOutputStream(args[1]));
+		PrintStream ps = new PrintStream(new FileOutputStream("test.out"));
 		for (AST cur = ast; cur.getNextSibling() != null; cur = (CommonAST) cur
 				.getNextSibling()) {
 			if (cur.getType() == BlockGrammarParserTokenTypes.COLON) {

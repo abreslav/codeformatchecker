@@ -1,5 +1,5 @@
 package ru.amse.smartlang.format.model;
 
-public interface IRulesBuilder {
+public interface IRulesConstructor {
 	IRuleSet buildRules(IBlock rootBlock);
 }

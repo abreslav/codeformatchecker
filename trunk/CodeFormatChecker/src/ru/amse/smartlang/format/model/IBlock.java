@@ -19,23 +19,22 @@ public interface IBlock {
 	 */
 	IBlockType getType();
 	
-	void visit(IBlockWalker walker);
+	void accept(IBlockVisitor walker);
 	
 	IBlock NULL = new IBlock() {
-		IRegion region = new Region(0, 0);
 		public IBlockType getType() {
 			return IBlockType.NULL;
 		}
 
 		public Whitespace getWhitespace() {
-			return Whitespace.getInstance(0, 0, 0);
+			throw new UnsupportedOperationException();
 		}
 
 		public IRegion getWhitespaceRegion() {
-			return region;
+			throw new UnsupportedOperationException();
 		}
 
-		public void visit(IBlockWalker walker) {
+		public void accept(IBlockVisitor walker) {
 			walker.visitPrimitive(this);
 		}
 	};

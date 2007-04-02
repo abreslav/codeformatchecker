@@ -3,7 +3,7 @@ package ru.amse.smartlang.format.checker;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import ru.amse.smartlang.format.model.AbstractBlockWalker;
+import ru.amse.smartlang.format.model.AbstractBlockVisitor;
 import ru.amse.smartlang.format.model.IBlock;
 import ru.amse.smartlang.format.model.IBlockType;
 import ru.amse.smartlang.format.model.IRegion;
@@ -14,10 +14,10 @@ import ru.amse.smartlang.format.model.Whitespace;
 public class FormatChecker {
 	private IRuleSet ruleSet;
 	private Collection<IFormatErrorListner> listners = new ArrayList<IFormatErrorListner>();
-	private boolean ok;
+	private boolean errorOccured;
 	private BlockWalker BLOCK_WALKER = new BlockWalker();
 	
-	private class BlockWalker extends AbstractBlockWalker{
+	private class BlockWalker extends AbstractBlockVisitor{
 		
 		@Override
 		public void visit(IBlockType parent, IBlockType left, IBlock thiz) {
@@ -43,11 +43,11 @@ public class FormatChecker {
 		}
 	}
 
-	public synchronized void addListner(IFormatErrorListner listner) {
+	public void addListner(IFormatErrorListner listner) {
 		listners.add(listner);
 	}
 	
-	public synchronized void removeListner(IFormatErrorListner listner) {
+	public void removeListner(IFormatErrorListner listner) {
 		listners.remove(listner);
 	}
 	
@@ -55,13 +55,13 @@ public class FormatChecker {
 		for(IFormatErrorListner l : listners) {
 			l.notify(region, found, expected);
 		}
-		ok = false;
+		errorOccured = false;
 	}
 	
-	public synchronized boolean check(IBlock rootBlock) {
-		ok = true;
-		rootBlock.visit(BLOCK_WALKER);
-		return ok;
+	public boolean check(IBlock rootBlock) {
+		errorOccured = true;
+		rootBlock.accept(BLOCK_WALKER);
+		return errorOccured;
 	}
 
 	public IRuleSet getRuleSet() {

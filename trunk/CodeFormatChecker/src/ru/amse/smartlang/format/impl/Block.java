@@ -2,7 +2,7 @@ package ru.amse.smartlang.format.impl;
 
 import ru.amse.smartlang.format.model.IBlock;
 import ru.amse.smartlang.format.model.IBlockType;
-import ru.amse.smartlang.format.model.IBlockWalker;
+import ru.amse.smartlang.format.model.IBlockVisitor;
 import ru.amse.smartlang.format.model.IRegion;
 import ru.amse.smartlang.format.model.Whitespace;
 
@@ -26,7 +26,7 @@ public class Block implements IBlock {
 		return whitespace;
 	}
 
-	public void visit(IBlockWalker walker) {
+	public void accept(IBlockVisitor walker) {
 		walker.visitPrimitive(this);
 	}
 
