@@ -4,49 +4,41 @@ package ru.amse.smartlang.format.parsers.tools.parsers;
 
 import antlr.TokenBuffer;
 import antlr.TokenStreamException;
-import antlr.TokenStreamIOException;
-import antlr.ANTLRException;
-import antlr.LLkParser;
-import antlr.Token;
 import antlr.TokenStream;
 import antlr.RecognitionException;
 import antlr.NoViableAltException;
-import antlr.MismatchedTokenException;
-import antlr.SemanticException;
 import antlr.ParserSharedInputState;
 import antlr.collections.impl.BitSet;
 import antlr.collections.AST;
-import java.util.Hashtable;
 import antlr.ASTFactory;
 import antlr.ASTPair;
-import antlr.collections.impl.ASTArray;
 
 public class BlockGrammarParser extends antlr.LLkParser       implements BlockGrammarParserTokenTypes
  {
 
-protected BlockGrammarParser(TokenBuffer tokenBuf, int k) {
+protected BlockGrammarParser(final TokenBuffer tokenBuf, final int k) {
   super(tokenBuf,k);
   tokenNames = _tokenNames;
   buildTokenTypeASTClassMap();
   astFactory = new ASTFactory(getTokenTypeToASTClassMap());
 }
 
-public BlockGrammarParser(TokenBuffer tokenBuf) {
+public BlockGrammarParser(final TokenBuffer tokenBuf) {
   this(tokenBuf,1);
 }
 
-protected BlockGrammarParser(TokenStream lexer, int k) {
+protected BlockGrammarParser(final TokenStream lexer, final int k) {
   super(lexer,k);
   tokenNames = _tokenNames;
   buildTokenTypeASTClassMap();
   astFactory = new ASTFactory(getTokenTypeToASTClassMap());
 }
 
-public BlockGrammarParser(TokenStream lexer) {
+public BlockGrammarParser(final TokenStream lexer) {
   this(lexer,1);
 }
 
-public BlockGrammarParser(ParserSharedInputState state) {
+public BlockGrammarParser(final ParserSharedInputState state) {
   super(state,1);
   tokenNames = _tokenNames;
   buildTokenTypeASTClassMap();
@@ -56,7 +48,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void all() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST all_AST = null;
 		
 		try {      // for error handling
@@ -83,9 +75,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				}
 			} while (true);
 			}
-			all_AST = (AST)currentAST.root;
+			all_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_0);
 		}
@@ -95,7 +87,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void block() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST block_AST = null;
 		
 		try {      // for error handling
@@ -110,9 +102,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 			expr_0();
 			astFactory.addASTChild(currentAST, returnAST);
 			match(SEMI);
-			block_AST = (AST)currentAST.root;
+			block_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_1);
 		}
@@ -122,7 +114,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void option_block() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST option_block_AST = null;
 		
 		try {      // for error handling
@@ -155,9 +147,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 			tmp7_AST = astFactory.create(LT(1));
 			astFactory.makeASTRoot(currentAST, tmp7_AST);
 			match(RCURLY);
-			option_block_AST = (AST)currentAST.root;
+			option_block_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_1);
 		}
@@ -167,7 +159,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void expr_0() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST expr_0_AST = null;
 		
 		try {      // for error handling
@@ -184,9 +176,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				
 			} while (true);
 			}
-			expr_0_AST = (AST)currentAST.root;
+			expr_0_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_4);
 		}
@@ -196,7 +188,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void expr_1() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST expr_1_AST = null;
 		
 		try {      // for error handling
@@ -229,9 +221,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 			}
 			}
 			}
-			expr_1_AST = (AST)currentAST.root;
+			expr_1_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_5);
 		}
@@ -241,7 +233,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void expr_2() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST expr_2_AST = null;
 		
 		try {      // for error handling
@@ -297,9 +289,9 @@ public BlockGrammarParser(ParserSharedInputState state) {
 			}
 			}
 			}
-			expr_2_AST = (AST)currentAST.root;
+			expr_2_AST = currentAST.root;
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_6);
 		}
@@ -309,7 +301,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	public final void expr_3() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
-		ASTPair currentAST = new ASTPair();
+		final ASTPair currentAST = new ASTPair();
 		AST expr_3_AST = null;
 		
 		try {      // for error handling
@@ -320,7 +312,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				tmp13_AST = astFactory.create(LT(1));
 				astFactory.makeASTRoot(currentAST, tmp13_AST);
 				match(ID);
-				expr_3_AST = (AST)currentAST.root;
+				expr_3_AST = currentAST.root;
 				break;
 			}
 			case STRING:
@@ -329,7 +321,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				tmp14_AST = astFactory.create(LT(1));
 				astFactory.makeASTRoot(currentAST, tmp14_AST);
 				match(STRING);
-				expr_3_AST = (AST)currentAST.root;
+				expr_3_AST = currentAST.root;
 				break;
 			}
 			case RANGE:
@@ -338,7 +330,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				tmp15_AST = astFactory.create(LT(1));
 				astFactory.makeASTRoot(currentAST, tmp15_AST);
 				match(RANGE);
-				expr_3_AST = (AST)currentAST.root;
+				expr_3_AST = currentAST.root;
 				break;
 			}
 			case LPAREN:
@@ -347,7 +339,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 				expr_0();
 				astFactory.addASTChild(currentAST, returnAST);
 				match(RPAREN);
-				expr_3_AST = (AST)currentAST.root;
+				expr_3_AST = currentAST.root;
 				break;
 			}
 			default:
@@ -356,7 +348,7 @@ public BlockGrammarParser(ParserSharedInputState state) {
 			}
 			}
 		}
-		catch (RecognitionException ex) {
+		catch (final RecognitionException ex) {
 			reportError(ex);
 			recover(ex,_tokenSet_7);
 		}
@@ -394,42 +386,42 @@ public BlockGrammarParser(ParserSharedInputState state) {
 	};
 	
 	private static final long[] mk_tokenSet_0() {
-		long[] data = { 2L, 0L};
+		final long[] data = { 2L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_0 = new BitSet(mk_tokenSet_0());
 	private static final long[] mk_tokenSet_1() {
-		long[] data = { 146L, 0L};
+		final long[] data = { 146L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_1 = new BitSet(mk_tokenSet_1());
 	private static final long[] mk_tokenSet_2() {
-		long[] data = { 4194226L, 0L, 0L, 0L};
+		final long[] data = { 4194226L, 0L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_2 = new BitSet(mk_tokenSet_2());
 	private static final long[] mk_tokenSet_3() {
-		long[] data = { 229504L, 0L};
+		final long[] data = { 229504L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_3 = new BitSet(mk_tokenSet_3());
 	private static final long[] mk_tokenSet_4() {
-		long[] data = { 262656L, 0L};
+		final long[] data = { 262656L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_4 = new BitSet(mk_tokenSet_4());
 	private static final long[] mk_tokenSet_5() {
-		long[] data = { 492160L, 0L};
+		final long[] data = { 492160L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_5 = new BitSet(mk_tokenSet_5());
 	private static final long[] mk_tokenSet_6() {
-		long[] data = { 493184L, 0L};
+		final long[] data = { 493184L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_6 = new BitSet(mk_tokenSet_6());
 	private static final long[] mk_tokenSet_7() {
-		long[] data = { 523904L, 0L};
+		final long[] data = { 523904L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_7 = new BitSet(mk_tokenSet_7());
