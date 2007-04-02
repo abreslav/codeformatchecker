@@ -22,8 +22,12 @@ public class FormatChecker {
 		@Override
 		public void visit(IBlockType parent, IBlockType left, IBlock thiz) {
 			IRule rule = ruleSet.getRule(parent, left, thiz.getType());
-			if(thiz.getWhitespace() != rule.getWhitespace()) {
-				notifyListners(thiz.getWhitespaceRegion(), thiz.getWhitespace(), rule.getWhitespace());
+			if(rule == null) {
+				notifyListners(parent, left, thiz);
+			} else {
+				if(thiz.getWhitespace() != rule.getWhitespace()) {
+					notifyListners(thiz.getWhitespaceRegion(), thiz.getWhitespace(), rule.getWhitespace());
+				}
 			}
 		}
 	}
@@ -33,6 +37,12 @@ public class FormatChecker {
 		this.ruleSet = ruleSet;
 	}
 	
+	public void notifyListners(IBlockType parent, IBlockType left, IBlock thiz) {
+		for(IFormatErrorListner l : listners) {
+			l.notify(parent, left, thiz.getType());
+		}
+	}
+
 	public synchronized void addListner(IFormatErrorListner listner) {
 		listners.add(listner);
 	}
