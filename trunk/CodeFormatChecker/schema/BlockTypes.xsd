@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2007 sp2 (http://www.altova.com) by daniil (@home) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="blockTypes">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="blockType">
+					<xs:complexType>
+						<xs:attribute name="isSynonim" type="xs:boolean" use="optional" default="false"/>
+						<xs:attribute name="isBogus" type="xs:boolean" use="optional" default="false"/>
+						<xs:attribute name="superType" type="xs:string" use="optional"/>
+						<xs:attribute name="name" use="required"/>
+						<xs:attribute name="isTerminal" type="xs:boolean" use="optional"/>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="package" type="xs:string" use="optional"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

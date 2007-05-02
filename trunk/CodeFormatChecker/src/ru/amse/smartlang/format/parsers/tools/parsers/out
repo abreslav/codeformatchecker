@@ -1,0 +1,1 @@
+java -classpath "D:\antlr\277\lib\antlr.jar;.;D:\Program Files\Java\jre1.6.0\lib\ext\QTJava.zip" antlr.Tool blocks.g

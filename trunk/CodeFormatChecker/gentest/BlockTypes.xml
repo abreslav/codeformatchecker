@@ -1,0 +1,58 @@
+<blockTypes package='ru.amse.smartlang.format.parsers.pascal'>
+  <blockType name='COMMA' isSynonim='false'  isTerminal='true' />
+  <blockType name='TYPE' isSynonim='false'  isTerminal='true' />
+  <blockType name='op_expression' superType='expression'  isSynonim='true'  isTerminal='false' />
+  <blockType name='PTR' isSynonim='false'  isTerminal='true' />
+  <blockType name='if_statement' superType='statement'  isSynonim='true'  isTerminal='false' />
+  <blockType name='compound_statement' superType='statement'  isSynonim='true'  isTerminal='false' />
+  <blockType name='type_decl' isSynonim='false'  isTerminal='false' />
+  <blockType name='ARRAY' isSynonim='false'  isTerminal='true' />
+  <blockType name='END' isSynonim='false'  isTerminal='true' />
+  <blockType name='single_type_decl' isSynonim='false'  isTerminal='false' />
+  <blockType name='expression' isSynonim='false'  isTerminal='false' />
+  <blockType name='while_statement' superType='statement'  isSynonim='true'  isTerminal='false' />
+  <blockType name='statement' isSynonim='false'  isTerminal='false' />
+  <blockType name='THEN' isSynonim='false'  isTerminal='true' />
+  <blockType name='program_block' isSynonim='false'  isTerminal='false' />
+  <blockType name='LBRACKET' isSynonim='false'  isTerminal='true' />
+  <blockType name='vars_declare' isSynonim='false'  isTerminal='false' />
+  <blockType name='single_var_declare' isSynonim='false'  isTerminal='false' />
+  <blockType name='PROGRAM' isSynonim='false'  isTerminal='true' />
+  <blockType name='types_declare' isSynonim='false'  isTerminal='false' />
+  <blockType name='RCURLY' isSynonim='false'  isTerminal='true' />
+  <blockType name='TO' isSynonim='false'  isTerminal='true' />
+  <blockType name='LESS' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='LCURLY' isSynonim='false'  isTerminal='true' />
+  <blockType name='INT' superType='prim_expression'  isSynonim='true'  isTerminal='true' />
+  <blockType name='ASSIGN' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='RBRACKET' isSynonim='false'  isTerminal='true' />
+  <blockType name='UNTIL' isSynonim='false'  isTerminal='true' />
+  <blockType name='GREATER' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='PLUS' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='RECORD' isSynonim='false'  isTerminal='true' />
+  <blockType name='MULT' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='expression_statement' superType='statement'  isSynonim='true'  isTerminal='false' />
+  <blockType name='ID' superType='prim_expression'  isSynonim='true'  isTerminal='true' />
+  <blockType name='op' isSynonim='false'  isTerminal='false' />
+  <blockType name='statements' isSynonim='false'  isTerminal='false' />
+  <blockType name='int_range' isSynonim='false'  isTerminal='false' />
+  <blockType name='DO' isSynonim='false'  isTerminal='true' />
+  <blockType name='SLASH' superType='op'  isSynonim='true'  isTerminal='true' />
+  <blockType name='WHILE' isSynonim='false'  isTerminal='true' />
+  <blockType name='OF' isSynonim='false'  isTerminal='true' />
+  <blockType name='repeat_statement' superType='statement'  isSynonim='true'  isTerminal='false' />
+  <blockType name='REPEAT' isSynonim='false'  isTerminal='true' />
+  <blockType name='BEGIN' isSynonim='false'  isTerminal='true' />
+  <blockType name='DOWNTO' isSynonim='false'  isTerminal='true' />
+  <blockType name='SEMI' isSynonim='false'  isTerminal='true' />
+  <blockType name='VAR' isSynonim='false'  isTerminal='true' />
+  <blockType name='EQUALS' isSynonim='false'  isTerminal='true' />
+  <blockType name='ELSE' isSynonim='false'  isTerminal='true' />
+  <blockType name='IF' isSynonim='false'  isTerminal='true' />
+  <blockType name='call_expression' superType='op_expression'  isSynonim='true'  isTerminal='false' />
+  <blockType name='FOR' isSynonim='false'  isTerminal='true' />
+  <blockType name='for_statement' superType='statement'  isSynonim='false'  isTerminal='false' />
+  <blockType name='COLON' isSynonim='false'  isTerminal='true' />
+  <blockType name='DOTDOT' isSynonim='false'  isTerminal='true' />
+  <blockType name='prim_expression' superType='op_expression'  isSynonim='true'  isTerminal='false' />
+</blockTypes>
