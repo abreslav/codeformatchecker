@@ -1,0 +1,6 @@
+[STATEMENT](new_lines = 0, indents = 0, spaces = 0)
+  [EXPRESSION](new_lines = 0, indents = 0, spaces = 0)
+    [EXPRESSION](new_lines = 0, indents = 0, spaces = 0)
+    [OP](new_lines = 0, indents = 0, spaces = 1)
+    [EXPRESSION](new_lines = 0, indents = 0, spaces = 1)
+      [EXPRESSION](new_lines = 0, indents = 0, spaces = 0)

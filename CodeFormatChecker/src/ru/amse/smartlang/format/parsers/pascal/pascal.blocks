@@ -1,0 +1,18 @@
+statement : 
+          | expression
+          | if_statement
+          | compound_statement
+          ;
+compound_statement : BEGIN! statement (SEMI statement)* END;
+
+if_statement : IF expression THEN statement (ELSE statatement)*;
+            ;
+expression : prim_expression (OP expression)* ;
+
+prim_expression : INT | ID;
+              
+           
+               
+
+   
+            

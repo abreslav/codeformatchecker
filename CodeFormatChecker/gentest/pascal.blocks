@@ -1,0 +1,80 @@
+@header {
+  package ru.amse.smartlang.format.parsers.pascal;  
+  import ru.amse.smartlang.format.*;
+  import java.util.*;
+}
+@options {
+  importVocab=Pascal;
+  k = 2;
+}
+
+program_block : (PROGRAM ID)? (types_declare | vars_declare)* compound_statement
+        ;
+
+types_declare : TYPE (single_type_decl SEMI)*
+              ;
+vars_declare : VAR (single_var_declare SEMI)*
+             ;
+
+single_var_declare : ID (COMMA ID)* COLON type_decl
+                   ;
+
+int_range : INT DOTDOT INT
+          ;
+
+single_type_decl : ID EQUALS type_decl;
+type_decl : ID
+         | RECORD (single_var_declare SEMI)* END
+         | PTR type_decl
+         | int_range
+         | ARRAY LBRACKET int_range RBRACKET OF type_decl
+         | RCURLY ID (COMMA ID)* LCURLY
+         ;
+                            
+
+statement : 
+          | expression_statement
+          | if_statement
+          | compound_statement
+          | for_statement
+          | while_statement
+          | repeat_statement
+          ;
+          
+statements : statement (SEMI statement)* 
+           ;
+          
+expression_statement : expression 
+                     ;
+
+compound_statement : BEGIN statements END
+                   ;
+
+if_statement : IF expression THEN statement (ELSE statement)*
+             ;
+
+while_statement : WHILE expression DO statement
+                ;
+
+repeat_statement : REPEAT statements UNTIL expression
+                 ;
+
+for_statement : FOR expression (TO | DOWNTO) expression DO statement
+              ;
+
+op : MULT | PLUS | SLASH | ASSIGN | LESS | GREATER | EQUALS;
+
+expression : prim_expression (op expression)*
+           ;
+call_expression : ID LCURLY (expression (COMMA expression)*)? RCURLY 
+                ;
+op_expression : (call_expression | prim_expression) (op (expression | prim_expression | call_expression))*
+              ;
+
+prim_expression : INT | ID;
+              
+           
+               
+
+   
+            
