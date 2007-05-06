@@ -1,18 +1,13 @@
 package ru.amse.smartlang.format.parsers.tools;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Reader;
 import java.io.Writer;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
 
 import ru.amse.smartlang.format.IBlockType;
 import ru.amse.smartlang.format.parsers.tools.parsers.BlockGrammarParserTokenTypes;
@@ -23,8 +18,6 @@ public class ANTLRParserGenerator {
 	private int iindex = 0;
 	
 	private String curDef;
-	
-//	private Set<String> terminals = new HashSet<String>();
 	
 	private Map<String, String> realTypes = new HashMap<String, String>();
 	
@@ -48,16 +41,12 @@ public class ANTLRParserGenerator {
 		
 	}
 	
-	public static void main(String[] args) throws SAXException, IOException, ParserConfigurationException {
-		new ANTLRParserGenerator().generate(new FileInputStream("./gentest/pascal.blocks"), new FileOutputStream("./gentest/PascalParser.g"), Utils.loadBlockTypesDef(new FileInputStream("./gentest/BlockTypes.xml")));
-	}
-	
-	public void generate(InputStream is, OutputStream os, BlockTypesDescription descr) {
+	public void generate(Reader is, Writer os, BlockTypesDescription descr) {
 		blockTypesDescription = descr;
 		buildRealTypes();
 		Map<String, String> attrs = new HashMap<String, String>();
 		AST ast = Utils.parseBlocksDef(is);
-		PrintStream ps = new PrintStream(os);
+		PrintWriter ps = new PrintWriter(os);
 		AST a = new CommonAST();
 		a.addChild(ast);
 		for(AST attr = ast; attr != null; attr = attr.getNextSibling()) {
@@ -83,7 +72,7 @@ public class ANTLRParserGenerator {
 	}
 	
 	
-	private void parseDef(AST def, PrintStream ps) {
+	private void parseDef(AST def, PrintWriter ps) {
 		iindex = 0;
 		ps.println(def.getText() + " returns[IBlock res = null]");
 		curDef = def.getText();
@@ -93,7 +82,7 @@ public class ANTLRParserGenerator {
 		ps.println("\n        ;\n");
 	}
 
-	private void putReturnCode(PrintStream ps) {
+	private void putReturnCode(PrintWriter ps) {
 		if(blockTypesDescription.getDescription(curDef).isBogus()) {
 			ps.print("res = returnBlock(BlockTypes." + realTypes.get(curDef).toUpperCase() + ", c, true); }");
 		} else {
@@ -101,7 +90,7 @@ public class ANTLRParserGenerator {
 		}
 	}
 	
-	private void parseBlock(AST firstChild, PrintStream ps) {
+	private void parseBlock(AST firstChild, PrintWriter ps) {
 		boolean empty = true;
 		for(AST chld = firstChild; chld != null; chld = chld.getNextSibling()) {
 			switch(chld.getType()) {

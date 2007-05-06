@@ -3,6 +3,7 @@ package ru.amse.smartlang.format.parsers.tools;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Reader;
 
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
@@ -49,7 +50,7 @@ public final class Utils {
 	
 	}
 	
-	public static AST parseBlocksDef(InputStream is) {
+	public static AST parseBlocksDef(Reader is) {
 		BlockGrammarLexer lexer = new BlockGrammarLexer(is);
 		BlockGrammarParser parser = new BlockGrammarParser(lexer);
 		try {

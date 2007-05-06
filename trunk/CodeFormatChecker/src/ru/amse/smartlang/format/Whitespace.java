@@ -45,19 +45,25 @@ public final class Whitespace implements Comparable<Whitespace> {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
+		if (this == obj) {
 			return true;
-		if (obj == null)
+		}
+		if (obj == null) {
 			return false;
-		if (getClass() != obj.getClass())
+		}
+		if (getClass() != obj.getClass()) {
 			return false;
+		}
 		final Whitespace other = (Whitespace) obj;
-		if (indents != other.indents)
+		if (indents != other.indents) {
 			return false;
-		if (newLines != other.newLines)
+		}
+		if (newLines != other.newLines) {
 			return false;
-		if (spaces != other.spaces)
+		}
+		if (spaces != other.spaces) {
 			return false;
+		}
 		return true;
 	}
 
