@@ -1,20 +1,12 @@
 package ru.amse.smartlang.format.parsers.tools;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
-
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
+import java.io.PrintWriter;
+import java.io.Writer;
 
 public class BlockTypesEnumGenerator {
 
-	public static void main(String[] args) throws FileNotFoundException, SAXException, IOException, ParserConfigurationException {
-		BlockTypesDescription descr = Utils.loadBlockTypesDef(new FileInputStream("./gentest/BlockTypes.xml"));
-		PrintStream ps = new PrintStream(new FileOutputStream("./gentest/BlockTypes.java"));
+	public void generateEnumClass(BlockTypesDescription descr, Writer writer) {
+		PrintWriter ps = new PrintWriter(writer);
 		if(descr.getPackage() != null) {
 			ps.println("package " + descr.getPackage() + ";");
 		}
@@ -32,5 +24,4 @@ public class BlockTypesEnumGenerator {
 		ps.println("    public boolean isSynonim() { return false; }\n}");
 		ps.close();
 	}
-
 }

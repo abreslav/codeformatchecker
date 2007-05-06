@@ -19,12 +19,6 @@ public interface IBlock {
 			visitor.visitPrimitive(this);
 		}
 
-		public void clearWhitespace() {
-		}
-		
-		public void recalculateWhitespace(IBlock parent, IBlock left) {
-		}
-		
 		@Override
 		public String toString() {
 			return "NULL_BLOCK";
@@ -33,6 +27,10 @@ public interface IBlock {
 		public String getText() {
 			return null;
 		}
+
+		public void setWhitespace(Whitespace w) {
+			throw new UnsupportedOperationException();
+		}
 		
 	};
 	
@@ -40,7 +38,6 @@ public interface IBlock {
 	IRegion getWhitespaceRegion();
 	IBlockType getType();
 	String getText();
-	void clearWhitespace();
-	void recalculateWhitespace(IBlock parent, IBlock left);
+	void setWhitespace(Whitespace w);
 	void accept(IBlockVisitor visitor);
 }

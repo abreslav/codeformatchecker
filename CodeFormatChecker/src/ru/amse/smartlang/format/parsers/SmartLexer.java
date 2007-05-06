@@ -1,4 +1,4 @@
-package ru.amse.smartlang.format.parsers.utils;
+package ru.amse.smartlang.format.parsers;
 
 import ru.amse.smartlang.format.IRegion;
 import ru.amse.smartlang.format.Region;

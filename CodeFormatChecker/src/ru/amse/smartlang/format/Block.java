@@ -44,19 +44,6 @@ public class Block implements IBlock {
 		visitor.visitPrimitive(this);
 	}
 	
-	public void clearWhitespace() {
-		whitespace = Whitespace.EMPTY;
-		whitespaceRegion = new Region(whitespaceRegion.getOffset(), 0);
-	}
-
-	public void recalculateWhitespace(IBlock parent, IBlock left) {
-		if(left == IBlock.NULL) {
-			whitespace = Whitespace.getInstance(whitespace.getNewLines(), whitespace.getIndents() - parent.getWhitespace().getIndents(), whitespace.getSpaces());
-		} else {
-			whitespace = Whitespace.getInstance(whitespace.getNewLines(), whitespace.getIndents() - left.getWhitespace().getIndents(), whitespace.getSpaces());
-		}
-	}
-
 	@Override
 	public String toString() {
 		return "[" + type.toString() + "]" + whitespace.toString();
@@ -64,5 +51,11 @@ public class Block implements IBlock {
 
 	public String getText() {
 		return text;
+	}
+
+
+
+	public void setWhitespace(Whitespace w) {
+		whitespace = w;
 	}
 }

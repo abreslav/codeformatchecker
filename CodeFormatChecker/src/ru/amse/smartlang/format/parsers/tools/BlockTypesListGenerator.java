@@ -1,25 +1,14 @@
 package ru.amse.smartlang.format.parsers.tools;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.xml.sax.SAXException;
-
-import ru.amse.smartlang.format.parsers.tools.parsers.BlockGrammarLexer;
-import ru.amse.smartlang.format.parsers.tools.parsers.BlockGrammarParser;
 import ru.amse.smartlang.format.parsers.tools.parsers.BlockGrammarParserTokenTypes;
 import antlr.CommonAST;
-import antlr.RecognitionException;
-import antlr.TokenStreamException;
 import antlr.collections.AST;
 
 public class BlockTypesListGenerator {
@@ -42,32 +31,11 @@ public class BlockTypesListGenerator {
 			
 	}
 	
-	public static void main(String[] args) throws FileNotFoundException {
-		BlockGrammarLexer lexer = new BlockGrammarLexer(new FileInputStream(
-				"./gentest/pascal.blocks"));
-		BlockGrammarParser parser = new BlockGrammarParser(lexer);
+	public static void generateBlockTypesList(AST ast, BlockTypesDescription oldBTD, Writer writer) {
 		Map<String, BlockTypeInfo> map = new HashMap<String, BlockTypeInfo>();
 		List<String> blocks = new ArrayList<String>();
-		try {
-			parser.all();
-		} catch (RecognitionException e) {
-			e.printStackTrace();
-			return;
-		} catch (TokenStreamException e) {
-			e.printStackTrace();
-			return;
-		}
-		BlockTypesDescription oldBTD = new BlockTypesDescription();
-		try {
-			oldBTD = Utils.loadBlockTypesDef(new FileInputStream("./gentest/BlockTypes.xml"));
-		} catch (SAXException e) {
-		} catch (IOException e) {
-		} catch (ParserConfigurationException e) {
-		}
-		AST ast = (CommonAST) parser.getAST();
 		visitAll(ast, map);
-		PrintStream ps = new PrintStream(new FileOutputStream(
-				"./gentest/BlockTypes.xml"));
+		PrintWriter ps = new PrintWriter(writer);
 		for (AST cur = ast; cur != null; cur = (CommonAST) cur
 				.getNextSibling()) {
 			if (cur.getType() == BlockGrammarParserTokenTypes.COLON) {
@@ -112,5 +80,5 @@ public class BlockTypesListGenerator {
 		ps.print("</blockTypes>");
 		ps.close();
 	}
-
+	
 }

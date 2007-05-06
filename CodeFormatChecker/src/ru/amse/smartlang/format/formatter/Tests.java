@@ -25,9 +25,9 @@ import ru.amse.smartlang.format.IBlockVisitor;
 import ru.amse.smartlang.format.ICompositeBlock;
 import ru.amse.smartlang.format.RuleSet;
 import ru.amse.smartlang.format.RuleSetConstructor;
+import ru.amse.smartlang.format.WhitespaceConverter;
 import ru.amse.smartlang.format.parsers.pascal.MyParser;
 import ru.amse.smartlang.format.parsers.pascal.PascalLexer;
-import ru.amse.smartlang.format.parsers.utils.WhitespaceConverter;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
@@ -66,7 +66,7 @@ public class Tests {
 		List<Object[]> result = new ArrayList<Object[]>();
 		File dir = new File("tests/formatter");
 		for (File file : dir.listFiles()) {
-			if (file.isDirectory()) {
+			if (file.isDirectory() && file.getName().startsWith("test")) {
 				result.add(new Object[] {file});			
 			}
 		}
@@ -88,7 +88,7 @@ public class Tests {
 
 	private static IBlock parse(String s) throws RecognitionException, TokenStreamException, FileNotFoundException {
 		IBlock res = new MyParser(new PascalLexer(new FileReader(s))).program_block();
-		WhitespaceConverter.convert(res);
+		WhitespaceConverter.toRelativeWhitespaces(res);
 		return res;
 	}
 
@@ -113,8 +113,12 @@ public class Tests {
 		new RuleSetConstructor(rs).construct(root);
 		IBlock parse = parse(file.getPath() + "/input.pas");
 		parse.accept(new BlockPrinter(new PrintStream(new File(file, "input.blocks"))));
-		new Formatter(rs).format(parse, new FileWriter(file.getPath() + "/result.pas"));
-		assertTrue(equalFiles(new FileReader(file.getPath() + "/result.pas"), new FileReader(file.getPath() + "/shouldbe.pas")));				
+		new Formatter(rs).format(parse);
+		WhitespaceConverter.toAbsoluteWhitespaces(parse);
+		FileWriter fileWriter = new FileWriter(new File(file, "result.pas"));
+		new BlockTreePrinter().print(parse, fileWriter);
+		fileWriter.close();
+		assertTrue("Test : " + file.getName(), equalFiles(new FileReader(file.getPath() + "/result.pas"), new FileReader(file.getPath() + "/shouldbe.pas")));				
 	}
 	
 }

@@ -26,9 +26,9 @@ import ru.amse.smartlang.format.Pattern;
 import ru.amse.smartlang.format.RuleSet;
 import ru.amse.smartlang.format.RuleSetConstructor;
 import ru.amse.smartlang.format.Whitespace;
+import ru.amse.smartlang.format.WhitespaceConverter;
 import ru.amse.smartlang.format.checker.FormatChecker;
 import ru.amse.smartlang.format.checker.IFormatErrorListner;
-import ru.amse.smartlang.format.parsers.utils.WhitespaceConverter;
 import antlr.RecognitionException;
 import antlr.TokenStreamException;
 
@@ -83,7 +83,7 @@ public class Tests {
 	
 	private static IBlock parse(String s) throws RecognitionException, TokenStreamException, FileNotFoundException {
 		IBlock res = new MyParser(new PascalLexer(new FileReader(s))).program_block();
-		WhitespaceConverter.convert(res);
+		WhitespaceConverter.toRelativeWhitespaces(res);
 		return res;
 	}
 
