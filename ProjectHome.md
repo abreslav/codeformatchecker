@@ -1,0 +1,1 @@
+Checks code format by exmaple
